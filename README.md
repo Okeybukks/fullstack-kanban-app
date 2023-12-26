@@ -4,23 +4,23 @@ This is a deployment documentaion for the KanBan Application designed and create
 
 The two methods for deploying locally are;
 
-a. Deploying directly on a Linux Ubuntu machine
+- Deploying directly on a Linux Ubuntu machine
 
-b. Deploying using docker-compose.
+- Deploying using docker-compose.
 
 Also, in addition to showing how it is deployed, the following DevOps principle will be applied on this project;
 
-a. Containerization of the applications i.e Frontedn, Backend and Database.
+- Containerization of the applications i.e Frontedn, Backend and Database.
 
-b. Creation of a Jenkins pipeline to build image, test image and subsequently push image to a public container register. This pipeline will have notification functionality integrated into it.
+- Creation of a Jenkins pipeline to build image, test image and subsequently push image to a public container register. This pipeline will have notification functionality integrated into it.
 
-c. create a infrastructures needed for a Kubernetes cluster using Terraform.
+- Create a infrastructures needed for a Kubernetes cluster using Terraform.
 
-d. Use Ansible to automate the creation of the Kubernetes cluster in the created infrastructure.
+- Use Ansible to automate the creation of the Kubernetes cluster in the created infrastructure.
 
-e. Create an Helm Package for the application
+- Create an Helm Package for the application
 
-f. Finally integrate GitOps using ArgoCD for the application deployment.
+- Finally integrate GitOps using ArgoCD for the application deployment.
 
 !["Full Stack Kanban App | React Node MongoDB Material-UI"](https://user-images.githubusercontent.com/67447840/177310317-3d9ad738-af83-4cc1-976a-c4a54c1033ff.png "Full Stack Kanban App | React Node MongoDB Material-UI")
 
