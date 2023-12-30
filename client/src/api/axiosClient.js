@@ -1,8 +1,10 @@
 import axios from 'axios'
 import queryString from 'query-string'
 
-const baseUrl = 'http://192.168.56.28:5000/api/v1/'
+const baseUrl = 'http://'+process.env.REACT_APP_BACKEND_IP+':5000/api/v1/'
 const getToken = () => localStorage.getItem('token')
+
+console.log(baseUrl)
 
 const axiosClient = axios.create({
   baseURL: baseUrl,
