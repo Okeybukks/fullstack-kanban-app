@@ -1,0 +1,49 @@
+---
+- name: Kubernertes Cluster creation in master node
+  hosts: master_server
+  remote_user: ansible
+  become: true
+
+  tasks:
+  - name: Initialize the kubernetes cluster on the master node
+    command: kubeadm init --pod-network-cidr 10.244.0.0/16
+
+  - name: Create kubeconfig file for kubectl usage in the master node
+    shell: |
+      mkdir -p /home/ubuntu/.kube
+      cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+      chown ubuntu:ubuntu /home/ubuntu/.kube/config
+
+  - name: install pip3 needed for installing prerequiste needed to run K8s manifests files.
+    apt: 
+      name: python3-pip
+      state: present 
+
+  - name: install pre-requisites needed to run K8s manifests files.
+    pip:
+      name:
+        - openshift
+        - pyyaml
+        - kubernetes 
+
+  - name: Create weave-net network for the K8s pod
+    kubernetes.core.k8s:
+      state: present
+      definition: "{{ lookup('file', './weave-daemonset-k8s.yaml') | from_yaml }}"
+      kubeconfig: /home/ubuntu/.kube/config
+
+  - name: Create kubeadm join command for worker node.
+    command: kubeadm token create --print-join-command
+    register: tokenjoin
+    ignore_errors: true
+  
+  # storing the gotten command to be used in the worker node
+  - set_fact:
+      kubeadm_join: "{{ tokenjoin.stdout }}"
+
+  - name: Run  kubeadm join command in worker node
+    shell: "{{ kubeadm_join }} --ignore-preflight-errors=swap"
+    delegate_to: "{{ groups['worker_server'][0] }}"
+    
+
+  
