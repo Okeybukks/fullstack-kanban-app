@@ -1,6 +1,6 @@
 ---
 - name: Kubernertes Cluster creation in master node
-  hosts: master_server
+  hosts: master
   remote_user: ansible
   become: true
 
@@ -43,7 +43,7 @@
 
   - name: Run  kubeadm join command in worker node
     shell: "{{ kubeadm_join }} --ignore-preflight-errors=swap"
-    delegate_to: "{{ groups['worker_server'][0] }}"
+    delegate_to: "{{ groups['worker'][0] }}"
     
 
   

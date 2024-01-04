@@ -12,6 +12,24 @@ variable "cidr" {
 
 variable "instance_names" {
   type        = list(string)
-  default     = ["master", "worker"]
+  default     = ["master", "worker1"]
   description = "list of instance names"
+}
+
+variable instance_count {
+  type        = number
+  default     = 2
+  description = "Number of instance to create"
+}
+
+variable instance_type {
+  type        = string
+  default     = "t2.medium"
+  description = "EC2 instance type"
+}
+
+variable key_name {
+  type        = string
+  default     = "kanban"
+  description = "key name"
 }

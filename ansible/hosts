@@ -1,9 +1,0 @@
-k8s_master ansible_host=ec2-35-173-223-159.compute-1.amazonaws.com  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=kanban.pem 
-k8s_worker ansible_host=ec2-3-227-247-97.compute-1.amazonaws.com  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=kanban.pem 
-
-
-[master_server]
-k8s_master
-
-[worker_server]
-k8s_worker

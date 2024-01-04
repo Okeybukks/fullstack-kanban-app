@@ -47,3 +47,5 @@ apt-get install -y kubelet kubeadm kubectl
 apt-mark hold kubelet kubeadm kubectl
 
 systemctl enable --now kubelet
+
+hostnamectl set-hostname ${instance_name}
