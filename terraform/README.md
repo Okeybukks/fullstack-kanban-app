@@ -71,4 +71,6 @@ Some information worth noting, the current Python script on works with terraform
 
 With the above commands, you will be able to create a Kubernetes cluster on AWS without any manual intervention.
 
+![image](kanban.png)
+
 
