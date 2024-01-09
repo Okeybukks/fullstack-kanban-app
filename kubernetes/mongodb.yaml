@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: mongodb
   serviceName: "mongo"
-  replicas: 
+  replicas: 2
   minReadySeconds: 10
   template:
     metadata:
@@ -23,18 +23,28 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           value: admin
         - name: MONGO_INITDB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-password
-              key: password
+          value: password
+          # valueFrom:
+          #   secretKeyRef:
+          #     name: mongodb-password
+          #     key: password
         - name: MONGO_INITDB_DATABASE
           value: test
-        command: ["mongod", " - replSet=rs0", " - bind_ip_all"]
+        command:
+          - mongod
+          - "--replSet"
+          - rs0
+          - "--bind_ip_all"
         ports:
         - containerPort: 27017
         volumeMounts:
         - name: mongo-data
           mountPath: /data/db
+      - name: mongo-sidecar
+        image: cvallance/mongo-k8s-sidecar
+        env:
+        - name: MONGO_SIDECAR_POD_LABELS
+          value: "role=mongo,environment=test"
   volumeClaimTemplates:
   - metadata:
       name: mongo-data
