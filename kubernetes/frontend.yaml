@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend
+  name: frontend
+  namespace: kanban
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image: achebeh/kanban-frontend:v1
+        name: kanban-frontend
+        ports:
+        - containerPort: 80
+        resources: {}
+        env:
+        - name: REACT_APP_BACKEND_IP
+          value: backend-service
+status: {}
