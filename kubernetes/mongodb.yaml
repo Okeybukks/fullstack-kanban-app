@@ -19,17 +19,17 @@ spec:
       containers:
       - name: mongodb
         image: mongo:latest
-        env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          value: admin
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          value: password
+        # env:
+        # - name: MONGO_INITDB_ROOT_USERNAME
+        #   value: admin
+        # - name: MONGO_INITDB_ROOT_PASSWORD
+        #   value: password
           # valueFrom:
           #   secretKeyRef:
           #     name: mongodb-password
           #     key: password
-        - name: MONGO_INITDB_DATABASE
-          value: test
+        # - name: MONGO_INITDB_DATABASE
+        #   value: test
         command:
           - mongod
           - "--replSet"

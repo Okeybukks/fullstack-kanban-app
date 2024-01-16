@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend
+  name: backend
+  namespace: kanban
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: achebeh/kanban-backend
+        name: kanban-backend
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          value: "5000"
+        - name: PASSWORD_SECRET_KEY
+          value: changeme
+        - name: TOKEN_SECRET_KEY
+          value: changeme
+        - name: MONGODB_URL
+          value: mongodb://kanbanUser:kanbanPass@mongodb-0.mongo,mongodb-1.mongo:27017/kanbanDB
+        resources: {}
+status: {}

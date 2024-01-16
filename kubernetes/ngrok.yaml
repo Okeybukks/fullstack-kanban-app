@@ -1,0 +1,9 @@
+version: "2"
+authtoken: 2YqI7imLhK79Bci9NSgvkTYB2ku_3WbKvdfNSSXheGpUKkcML
+tunnels:
+  frontend:
+    proto: http
+    addr: http://10.106.127.164:3000 #IP address of the frontend service
+  backend:
+    proto: http
+    addr: http://10.111.100.200:5000  #IP address of the backend service

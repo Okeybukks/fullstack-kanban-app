@@ -1,0 +1,18 @@
+# apiVersion: v1
+# data:
+#   REACT_APP_BACKEND_IP: https://faab-197-255-62-254.ngrok-free.app
+# kind: ConfigMap
+# metadata:
+#   creationTimestamp: null
+#   name: backend-ip
+#   namespace: kanban
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-ip
+  namespace: kanban
+data:
+  config.js: |
+    window.REACT_APP_BACKEND_IP="https://faab-197-255-62-254.ngrok-free.app";
+
