@@ -17,9 +17,9 @@ RUN yarn install --production
 # Copying other application files 
 COPY . .
 
-ARG REACT_APP_BACKEND_IP
+# ARG REACT_APP_BACKEND_IP
 
-ENV REACT_APP_BACKEND_IP $REACT_APP_BACKEND_IP
+# ENV REACT_APP_BACKEND_IP $REACT_APP_BACKEND_IP
 
 # Building production package.
 RUN yarn build
@@ -31,11 +31,15 @@ ENV NODE_ENV production
 # Copying built package to nginx
 COPY --from=build /app/build /usr/share/nginx/html
 
+COPY run.sh /config/run.sh
+
+RUN chmod +x /config/run.sh
+
 # Copying nginx.conf file to nginx conf default path.
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Exposing port needed for application
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/bin/sh", "/config/run.sh"]
 

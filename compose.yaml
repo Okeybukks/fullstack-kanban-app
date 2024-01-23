@@ -5,10 +5,10 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-      args:
-        - REACT_APP_BACKEND_IP=192.168.56.28
     ports:
       - 3000:80
+    environment:
+      - REACT_APP_BACKEND_IP=192.168.56.28
     networks:
       - back
     healthcheck:
