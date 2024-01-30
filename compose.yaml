@@ -8,7 +8,7 @@ services:
     ports:
       - 3000:80
     environment:
-      - REACT_APP_BACKEND_IP=192.168.56.28
+      - REACT_APP_BACKEND_IP=http://192.168.56.46:5000
     networks:
       - back
     healthcheck:
@@ -20,9 +20,10 @@ services:
 
   nodeapp:
     container_name: nodeapp
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+    image: achebeh/kanban-backend
+    # build:
+    #   context: ./server
+    #   dockerfile: Dockerfile
     ports:
       - 5000:5000
     networks:
@@ -31,7 +32,7 @@ services:
       - PORT=5000
       - PASSWORD_SECRET_KEY=changeme
       - TOKEN_SECRET_KEY=changeme
-      - MONGODB_URL=mongodb://username:password@mongodb:27017/kanbanDB
+      - MONGODB_URL=mongodb://kanban:password@mongodb:27017/kanbanDB
 
 networks:
   back:

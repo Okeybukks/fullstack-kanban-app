@@ -17,25 +17,17 @@ spec:
         app: frontend
     spec:
       containers:
-      - image: achebeh/kanban-frontend:v2
+      - image: achebeh/kanban-frontend
         name: kanban-frontend
         ports:
         - containerPort: 80
         resources: {}
         env:
         - name: REACT_APP_BACKEND_IP
-          value: https://faab-197-255-62-254.ngrok-free.app
+          value: https://fa52-197-242-243-3.ngrok-free.app
           # valueFrom:
           #   configMap: 
           #     name: backend-ip
               # key: REACT_APP_BACKEND_IP
-        volumeMounts:
-          - mountPath: /usr/share/nginx/html/config.js
-            name: config-js
-            subPath: config.js
-      volumes:
-      - name: config-js
-        configMap:
-          name: backend-ip
       
 status: {}

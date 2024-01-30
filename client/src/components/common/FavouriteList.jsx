@@ -5,8 +5,13 @@ import { useParams, Link } from 'react-router-dom'
 import boardApi from '../../api/boardApi'
 import { setFavouriteList } from '../../redux/features/favouriteSlice'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import props from 'prop-types';
 
 const FavouriteList = () => {
+  // I added this lines
+  // if (!props.results) return 'no data';
+  // if (!Array.isArray(props.results)) return 'results are not array'
+  
   const dispatch = useDispatch()
   const list = useSelector((state) => state.favourites.value)
   const [activeIndex, setActiveIndex] = useState(0)

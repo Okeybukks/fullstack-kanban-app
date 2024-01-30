@@ -31,6 +31,6 @@ spec:
         - name: TOKEN_SECRET_KEY
           value: changeme
         - name: MONGODB_URL
-          value: mongodb://kanbanUser:kanbanPass@mongodb-0.mongo,mongodb-1.mongo:27017/kanbanDB
+          value: mongodb://achebeh:password@mongodb-0.mongo,mongodb-1.mongo:27017/kanbanDB
         resources: {}
 status: {}
