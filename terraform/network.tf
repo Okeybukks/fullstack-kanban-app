@@ -2,6 +2,10 @@
 resource "aws_vpc" "kanban_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
+
+  tags = {
+    "kubernetes.io/cluster/kubernetes" = "owned"
+  }
 }
 
 # Subnet creation
@@ -14,6 +18,7 @@ resource "aws_subnet" "public" {
 
   tags = {
     Name = "Public_subnet_${count.index}"
+    "kubernetes.io/cluster/kubernetes" = "owned"
   }
 }
 
@@ -37,6 +42,7 @@ resource "aws_route_table" "kanban_rt" {
 
   tags = {
     Name = "kanban-rt"
+    "kubernetes.io/cluster/kubernetes" = "owned"
   }
 }
 

@@ -11,7 +11,7 @@ def run_terraform():
 
 def generate_ansible_inventory():
     terraform_outputs = run_terraform()
-    instance_ips = terraform_outputs.get("instance_public_dns", {}).get("value", [])
+    instance_ips = terraform_outputs.get("instance_public_ips", {}).get("value", [])
     instance_names = terraform_outputs.get("instance_name", {}).get("value", [])
 
     items = zip(instance_ips, instance_names)

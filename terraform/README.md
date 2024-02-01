@@ -74,3 +74,11 @@ With the above commands, you will be able to create a Kubernetes cluster on AWS 
 ![image](kanban.png)
 
 
+
+
+
+
+
+
+
+

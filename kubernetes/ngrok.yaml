@@ -6,4 +6,4 @@ tunnels:
     addr: http://10.108.134.13:3000 #IP address of the frontend service
   backend:
     proto: http
-    addr: http://10.97.149.190:5000  #IP address of the backend service
+    addr: http://10.106.21.108:5000  #IP address of the backend service

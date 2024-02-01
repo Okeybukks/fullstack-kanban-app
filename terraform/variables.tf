@@ -16,19 +16,19 @@ variable "instance_names" {
   description = "list of instance names"
 }
 
-variable instance_count {
+variable "instance_count" {
   type        = number
   default     = 2
   description = "Number of instance to create"
 }
 
-variable instance_type {
+variable "instance_type" {
   type        = string
   default     = "t2.medium"
   description = "EC2 instance type"
 }
 
-variable key_name {
+variable "key_name" {
   type        = string
   default     = "kanban"
   description = "key name"
