@@ -56,7 +56,7 @@ nodeRegistration:
     cloud-provider: external
  ```
 
- This configuration file is to be used when intializing the cluster in the controller instance. Make sure the change `82.56.23.565` value in **certSANs** and also `name` value in **nodeRegistration**.
+ This configuration file is to be used when intializing the cluster in the controller instance. Make sure the change `Controller Public IP` value in **certSANs** and also `name` value in **nodeRegistration**.
 
  To initialize the cluster run this command on the controller instance;
 
