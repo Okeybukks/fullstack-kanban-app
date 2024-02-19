@@ -1,4 +1,5 @@
 version: "3.8"
+name: reactapp
 services:
   reactapp:
     container_name: reactapp

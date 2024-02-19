@@ -1,0 +1,82 @@
+version: '3.2'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+    - 9090:9090
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    - prometheus-data:/prometheus
+    depends_on:
+    - cadvisor
+    networks:
+      - prometheus
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+    - 8080:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    depends_on:
+    - redis
+    networks:
+      - prometheus
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+    - 6379:6379
+    networks:
+      - prometheus
+  grafan:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    volumes:
+    - grafana-data:/var/lib/grafana
+    ports:
+    - 3001:3000
+    networks:
+      - prometheus
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    ports:
+    - 9100:9100
+    networks:
+      - prometheus
+
+  loki:
+    image: grafana/loki:2.9.4
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+    - ./loki-config.yaml:/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - prometheus
+ 
+  promtail:
+    image: grafana/promtail:2.9.4
+    container_name: promtail
+    volumes:
+    - /var/log:/var/log
+    - ./promtail.yaml:/etc/promtail/config.yml
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/lib/docker/containers/:/var/lib/docker/containers/
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - prometheus
+
+volumes:
+  prometheus-data:
+  grafana-data:
+networks:
+  prometheus:
